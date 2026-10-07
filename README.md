@@ -26,6 +26,7 @@ python scaffold.py
 - [x] **14.** assign_nearest_codes
 - [x] **15.** lookup_codebook_vectors
 - [x] **16.** straight_through_quantize
+- [x] **17.** codebook_loss
 
 ---
 

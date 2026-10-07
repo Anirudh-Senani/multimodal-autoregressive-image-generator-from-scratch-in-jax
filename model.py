@@ -118,3 +118,8 @@ def straight_through_quantize(latents, quantized):
     # TODO: return quantized in value but with latents' gradient (straight-through)
     return latents + jax.lax.stop_gradient(quantized - latents)
 
+# Step 17 - codebook_loss
+def codebook_loss(latents, quantized):
+    # TODO: mean squared error between stop_gradient(latents) and quantized
+    return ((jax.lax.stop_gradient(latents) - quantized)**2).mean()
+
