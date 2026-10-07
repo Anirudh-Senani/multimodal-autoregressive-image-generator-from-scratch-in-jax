@@ -101,3 +101,10 @@ def grid_distances_to_codebook(latents, codebook):
 
     return ((latents[:, None, :] - codebook[None, :, :])**2).sum(axis=-1)
 
+# Step 14 - assign_nearest_codes
+import jax
+
+def assign_nearest_codes(distances):
+    # TODO: return the nearest codebook index for each latent via argmin over codes
+    return jnp.argmin(distances, axis=-1)
+
