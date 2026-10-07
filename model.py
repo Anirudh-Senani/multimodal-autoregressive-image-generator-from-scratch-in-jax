@@ -138,3 +138,38 @@ def total_vqvae_loss(recon_loss, cb_loss, commit_loss, commitment_weight):
     # TODO: return recon_loss + cb_loss + commitment_weight * commit_loss as a scalar
     return recon_loss + cb_loss + commitment_weight * commit_loss
 
+# Step 21 - vqvae_loss_and_grads
+def vqvae_loss_and_grads(params, image_batch, patch_size, commitment_weight):
+    # TODO: Compute the VQ-VAE total loss and gradients wrt encoder/decoder/codebook over a batch of images.
+    imsplit = lambda x: split_image_into_patches(x, patch_size)
+    imrecon = lambda x, gh, gw: reassemble_patches_into_image(x, gh, gw, patch_size)
+    total_loss = lambda rc, cb, cl: total_vqvae_loss(rc, cb, cl, commitment_weight)
+
+    def forward(params, image_batch):
+        patches = jax.vmap(imsplit)(image_batch)
+        b, gh, gw, ph, pw = patches.shape
+        patches_flat = patches.reshape((b, gh*gw, ph*pw))
+
+        latents = encode_patches(patches_flat, params['encoder'])
+        dists = jax.vmap(grid_distances_to_codebook, in_axes=(0,None))(latents, params['codebook'])
+        inds = assign_nearest_codes(dists)
+
+        quantized = lookup_codebook_vectors(inds, params['codebook'])
+        latents_st = straight_through_quantize(latents, quantized)
+
+        decoded = decode_latents(latents_st, params['decoder'])
+        recon_batch = jax.vmap(imrecon, in_axes=(0,None,None))(decoded, gh, gw)
+
+        cb_loss = codebook_loss(latents, quantized)
+        commit_loss = commitment_loss(latents, quantized)
+        recon_loss = reconstruction_loss(image_batch, recon_batch)
+
+        loss = total_loss(recon_loss, cb_loss, commit_loss)
+
+        return loss
+
+    loss_fn = lambda p: forward(p, image_batch)
+    grad_fn = jax.value_and_grad(loss_fn)
+
+    return grad_fn(params)
+
