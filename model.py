@@ -83,3 +83,8 @@ def reassemble_patches_into_image(flat_patches, grid_h, grid_w, patch_size):
     # TODO: reshape each flat patch to a square and tile them into the full image
     return flat_patches.reshape(grid_h, grid_w, patch_size, patch_size).transpose(0,2,1,3).reshape((grid_h*patch_size, grid_w*patch_size))
 
+# Step 11 - init_codebook
+def init_codebook(key, num_codes, latent_dim):
+    # TODO: draw a (num_codes, latent_dim) table of small random values from key
+    return jax.random.normal(key, shape=(num_codes, latent_dim)) * 0.1
+
