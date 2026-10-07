@@ -88,3 +88,8 @@ def init_codebook(key, num_codes, latent_dim):
     # TODO: draw a (num_codes, latent_dim) table of small random values from key
     return jax.random.normal(key, shape=(num_codes, latent_dim)) * 0.1
 
+# Step 12 - squared_distance_to_codebook
+def squared_distance_to_codebook(latent, codebook):
+    # TODO: squared Euclidean distance from one latent vector to every codebook vector
+    return ((codebook - latent[None,:])**2).sum(axis=-1)
+

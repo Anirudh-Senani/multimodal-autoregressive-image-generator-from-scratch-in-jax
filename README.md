@@ -21,6 +21,7 @@ python scaffold.py
 - [x] **9.** decode_latents
 - [x] **10.** reassemble_patches_into_image
 - [x] **11.** init_codebook
+- [x] **12.** squared_distance_to_codebook
 
 ---
 
