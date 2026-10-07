@@ -133,3 +133,8 @@ def reconstruction_loss(image, reconstruction):
     # TODO: return the mean squared error between image and reconstruction
     return ((image - reconstruction)**2).mean()
 
+# Step 20 - total_vqvae_loss
+def total_vqvae_loss(recon_loss, cb_loss, commit_loss, commitment_weight):
+    # TODO: return recon_loss + cb_loss + commitment_weight * commit_loss as a scalar
+    return recon_loss + cb_loss + commitment_weight * commit_loss
+

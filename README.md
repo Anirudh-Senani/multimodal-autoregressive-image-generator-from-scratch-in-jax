@@ -29,6 +29,7 @@ python scaffold.py
 - [x] **17.** codebook_loss
 - [x] **18.** commitment_loss
 - [x] **19.** reconstruction_loss
+- [x] **20.** total_vqvae_loss
 
 ---
 
