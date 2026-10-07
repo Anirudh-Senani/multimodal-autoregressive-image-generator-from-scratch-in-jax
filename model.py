@@ -78,3 +78,8 @@ def decode_latents(latents, decoder_weight):
     # TODO: project each latent vector back to flat patch pixels with the linear decoder
     return latents @ decoder_weight
 
+# Step 10 - reassemble_patches_into_image
+def reassemble_patches_into_image(flat_patches, grid_h, grid_w, patch_size):
+    # TODO: reshape each flat patch to a square and tile them into the full image
+    return flat_patches.reshape(grid_h, grid_w, patch_size, patch_size).transpose(0,2,1,3).reshape((grid_h*patch_size, grid_w*patch_size))
+

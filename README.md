@@ -19,6 +19,7 @@ python scaffold.py
 - [x] **7.** encode_patches
 - [x] **8.** init_patch_decoder
 - [x] **9.** decode_latents
+- [x] **10.** reassemble_patches_into_image
 
 ---
 
