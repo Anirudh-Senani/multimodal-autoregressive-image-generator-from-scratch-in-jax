@@ -31,3 +31,15 @@ def assign_image_labels(images):
 
     return ['left' if label else 'right' for label in labels.tolist()]
 
+# Step 3 - normalize_image_batch
+def normalize_image_batch(images):
+    # TODO: rescale images from [0, 1] into the symmetric [-1, 1] range
+    # B, H, W = images.shape
+    # means = images.reshape((B, H*W)).mean(axis=0, keepdims=True)
+    # sigma = images.reshape((B, H*W)).var(axis=0, keepdims=True)
+
+    # means = means.reshape((B, 1, 1))
+    # sigma = sigma.reshape((B, 1, 1))
+
+    return 2*images - 1
+

@@ -12,6 +12,7 @@ python scaffold.py
 
 - [x] **1.** generate_toy_images
 - [x] **2.** assign_image_labels
+- [x] **3.** normalize_image_batch
 
 ---
 
