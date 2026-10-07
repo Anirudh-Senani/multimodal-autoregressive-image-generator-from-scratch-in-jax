@@ -52,3 +52,9 @@ def split_image_into_patches(image, patch_size):
 
     return image.reshape((num_patches_h, patch_size, num_patches_w, patch_size)).transpose(0,2,1,3)
 
+# Step 5 - flatten_patches
+def flatten_patches(patches):
+    # TODO: flatten each (p, p) patch in a (gh, gw, p, p) grid into a 1D pixel vector
+    gh, gw, ph, pw = patches.shape
+    return patches.reshape(gh*gw, ph*pw)
+

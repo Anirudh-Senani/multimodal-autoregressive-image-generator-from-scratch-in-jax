@@ -14,6 +14,7 @@ python scaffold.py
 - [x] **2.** assign_image_labels
 - [x] **3.** normalize_image_batch
 - [x] **4.** split_image_into_patches
+- [x] **5.** flatten_patches
 
 ---
 
