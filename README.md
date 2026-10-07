@@ -24,6 +24,7 @@ python scaffold.py
 - [x] **12.** squared_distance_to_codebook
 - [x] **13.** grid_distances_to_codebook
 - [x] **14.** assign_nearest_codes
+- [x] **15.** lookup_codebook_vectors
 
 ---
 
