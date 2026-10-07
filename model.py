@@ -128,3 +128,8 @@ def commitment_loss(latents, quantized):
     # TODO: mean squared error between latents and stop_gradient(quantized)
     return ((latents - jax.lax.stop_gradient(quantized))**2).mean()
 
+# Step 19 - reconstruction_loss
+def reconstruction_loss(image, reconstruction):
+    # TODO: return the mean squared error between image and reconstruction
+    return ((image - reconstruction)**2).mean()
+
