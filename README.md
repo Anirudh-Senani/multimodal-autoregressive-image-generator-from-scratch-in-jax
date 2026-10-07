@@ -11,6 +11,7 @@ python scaffold.py
 ## Steps
 
 - [x] **1.** generate_toy_images
+- [x] **2.** assign_image_labels
 
 ---
 
