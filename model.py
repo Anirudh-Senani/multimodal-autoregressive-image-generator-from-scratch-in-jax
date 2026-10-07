@@ -93,3 +93,9 @@ def squared_distance_to_codebook(latent, codebook):
     # TODO: squared Euclidean distance from one latent vector to every codebook vector
     return ((codebook - latent[None,:])**2).sum(axis=-1)
 
+# Step 13 - grid_distances_to_codebook
+def grid_distances_to_codebook(latents, codebook):
+    # TODO: squared distance from each latent (P, D) to each code (K, D) -> (P, K)
+    dist = lambda x: squared_distance_to_codebook(x, codebook)
+    return jax.vmap(dist)(latents)
+
