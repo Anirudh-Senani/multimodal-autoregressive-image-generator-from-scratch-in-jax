@@ -43,3 +43,12 @@ def normalize_image_batch(images):
 
     return 2*images - 1
 
+# Step 4 - split_image_into_patches
+def split_image_into_patches(image, patch_size):
+    # TODO: Split a single (H, W) image into a grid of non-overlapping square patches.
+    H, W = image.shape
+    num_patches_h = H//patch_size
+    num_patches_w = W//patch_size
+
+    return image.reshape((num_patches_h, patch_size, num_patches_w, patch_size)).transpose(0,2,1,3)
+
