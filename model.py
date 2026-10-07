@@ -113,3 +113,8 @@ def lookup_codebook_vectors(indices, codebook):
     # TODO: return the codebook row for each token index, shape (num_patches, latent_dim)
     return codebook[indices]
 
+# Step 16 - straight_through_quantize
+def straight_through_quantize(latents, quantized):
+    # TODO: return quantized in value but with latents' gradient (straight-through)
+    return latents + jax.lax.stop_gradient(quantized - latents)
+
