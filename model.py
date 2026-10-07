@@ -173,3 +173,11 @@ def vqvae_loss_and_grads(params, image_batch, patch_size, commitment_weight):
 
     return grad_fn(params)
 
+# Step 22 - apply_vqvae_update
+def apply_vqvae_update(params, grads, opt_state, optimizer):
+    # TODO: Apply one optax update to the VQ-VAE params and return new params + opt state.
+    updates, opt_state = optimizer.update(grads, opt_state, params)
+    params = optax.apply_updates(params, updates)
+
+    return params, opt_state
+
