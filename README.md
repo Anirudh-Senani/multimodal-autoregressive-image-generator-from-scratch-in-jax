@@ -16,6 +16,7 @@ python scaffold.py
 - [x] **4.** split_image_into_patches
 - [x] **5.** flatten_patches
 - [x] **6.** init_patch_encoder
+- [x] **7.** encode_patches
 
 ---
 
