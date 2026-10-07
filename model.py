@@ -27,8 +27,7 @@ def assign_image_labels(images):
     # TODO: label each image 'left' or 'right' by comparing left vs right pixel mass
     image_size = images.shape[-1]
     row_sums = images.sum(axis=1)
-    labels = row_sums[:, :image_size//2].sum(axis=-1) <= row_sums[:, image_size//2:]
-    print(labels)
+    labels = row_sums[:, :image_size//2].sum(axis=-1) >= row_sums[:, image_size//2:].sum(axis=-1)
 
-    return ['left' if label==1 else 'right' for label in labels.tolist()]
+    return ['left' if label else 'right' for label in labels.tolist()]
 
