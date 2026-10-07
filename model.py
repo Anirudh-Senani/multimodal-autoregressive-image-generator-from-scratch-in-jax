@@ -96,6 +96,8 @@ def squared_distance_to_codebook(latent, codebook):
 # Step 13 - grid_distances_to_codebook
 def grid_distances_to_codebook(latents, codebook):
     # TODO: squared distance from each latent (P, D) to each code (K, D) -> (P, K)
-    dist = lambda x: squared_distance_to_codebook(x, codebook)
-    return jax.vmap(dist)(latents)
+    # dist = lambda x: squared_distance_to_codebook(x, codebook)
+    # return jax.vmap(dist)(latents)
+
+    return ((latents[:, None, :] - codebook[None, :, :])**2).sum(axis=-1)
 
