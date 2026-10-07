@@ -68,3 +68,8 @@ def encode_patches(flat_patches, encoder_weight):
     # TODO: Project each flattened patch to a latent vector with the linear encoder.
     return flat_patches @ encoder_weight
 
+# Step 8 - init_patch_decoder
+def init_patch_decoder(key, latent_dim, patch_dim):
+    # TODO: sample a (latent_dim, patch_dim) weight from key, scaled by 1/sqrt(latent_dim)
+    return jax.random.normal(key, shape=(latent_dim, patch_dim))/(latent_dim**0.5)
+
