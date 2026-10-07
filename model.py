@@ -123,3 +123,8 @@ def codebook_loss(latents, quantized):
     # TODO: mean squared error between stop_gradient(latents) and quantized
     return ((jax.lax.stop_gradient(latents) - quantized)**2).mean()
 
+# Step 18 - commitment_loss
+def commitment_loss(latents, quantized):
+    # TODO: mean squared error between latents and stop_gradient(quantized)
+    return ((latents - jax.lax.stop_gradient(quantized))**2).mean()
+

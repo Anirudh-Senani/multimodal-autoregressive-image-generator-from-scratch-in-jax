@@ -27,6 +27,7 @@ python scaffold.py
 - [x] **15.** lookup_codebook_vectors
 - [x] **16.** straight_through_quantize
 - [x] **17.** codebook_loss
+- [x] **18.** commitment_loss
 
 ---
 
