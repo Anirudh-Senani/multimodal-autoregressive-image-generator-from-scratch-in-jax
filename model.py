@@ -73,3 +73,8 @@ def init_patch_decoder(key, latent_dim, patch_dim):
     # TODO: sample a (latent_dim, patch_dim) weight from key, scaled by 1/sqrt(latent_dim)
     return jax.random.normal(key, shape=(latent_dim, patch_dim))/(latent_dim**0.5)
 
+# Step 9 - decode_latents
+def decode_latents(latents, decoder_weight):
+    # TODO: project each latent vector back to flat patch pixels with the linear decoder
+    return latents @ decoder_weight
+

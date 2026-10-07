@@ -18,6 +18,7 @@ python scaffold.py
 - [x] **6.** init_patch_encoder
 - [x] **7.** encode_patches
 - [x] **8.** init_patch_decoder
+- [x] **9.** decode_latents
 
 ---
 
