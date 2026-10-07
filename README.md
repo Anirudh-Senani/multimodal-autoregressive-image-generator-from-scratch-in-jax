@@ -15,6 +15,7 @@ python scaffold.py
 - [x] **3.** normalize_image_batch
 - [x] **4.** split_image_into_patches
 - [x] **5.** flatten_patches
+- [x] **6.** init_patch_encoder
 
 ---
 
