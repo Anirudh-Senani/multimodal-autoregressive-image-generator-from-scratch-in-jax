@@ -549,3 +549,8 @@ def average_reconstruction_error(encoder_params, decoder_params, codebook, image
 
     return (jax.vmap(forward)(normalize_image_batch(image_batch))).mean()
 
+# Step 61 - nearest_neighbor_distance_to_dataset
+def nearest_neighbor_distance_to_dataset(generated_image, dataset_images):
+    # TODO: return the min squared Euclidean distance to any dataset image
+    return ((dataset_images - generated_image[None, :, :])**2).sum(axis=(1,2)).min()
+

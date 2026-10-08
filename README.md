@@ -70,6 +70,7 @@ python scaffold.py
 - [x] **58.** decode_tokens_to_image
 - [x] **59.** next_token_accuracy
 - [x] **60.** average_reconstruction_error
+- [x] **61.** nearest_neighbor_distance_to_dataset
 
 ---
 
