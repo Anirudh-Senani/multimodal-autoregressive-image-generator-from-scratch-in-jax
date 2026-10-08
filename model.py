@@ -238,3 +238,10 @@ def lookup_token_embeddings(token_embedding, token_ids):
     # TODO: Select the embedding row for each id to get (seq_len, d_model).
     return token_embedding[token_ids]
 
+# Step 32 - add_positional_embeddings
+def add_positional_embeddings(token_embeds, positional_embedding):
+    # TODO: add the first seq_len positional rows to the token embeddings
+    seq_len, _ = token_embeds.shape
+    max_len, _ = positional_embedding.shape
+    return token_embeds + positional_embedding[:min(seq_len, max_len)]
+
