@@ -49,6 +49,7 @@ python scaffold.py
 - [x] **37.** reshape_to_heads
 - [x] **38.** scaled_dot_product_scores
 - [x] **39.** add_causal_mask_to_scores
+- [x] **40.** attention_weights_softmax
 
 ---
 

@@ -295,3 +295,9 @@ def add_causal_mask_to_scores(scores, causal_mask):
     # TODO: broadcast-add the (seq_len, seq_len) mask onto (num_heads, seq_len, seq_len) scores
     return scores + causal_mask[None,:,:]
 
+# Step 40 - attention_weights_softmax
+def attention_weights_softmax(masked_scores):
+    # TODO: numerically stable softmax over the last (key) axis of masked_scores
+    shifted = jnp.exp(masked_scores - masked_scores.max(axis=-1, keepdims=True))
+    return shifted/jnp.sum(shifted, axis=-1, keepdims=True)
+
