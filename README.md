@@ -54,6 +54,7 @@ python scaffold.py
 - [x] **42.** merge_heads_and_project
 - [x] **43.** init_feedforward_params
 - [x] **44.** feedforward_mlp
+- [x] **45.** transformer_block
 
 ---
 

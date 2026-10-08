@@ -329,3 +329,27 @@ def feedforward_mlp(x, ff_params):
 
     return a1 @ ff_params['w2']
 
+# Step 45 - transformer_block
+def transformer_block(x, block_params, causal_mask, num_heads):
+    # TODO: pre-norm attention with a residual, then pre-norm MLP with a residual
+    xin = layer_norm(x, block_params['ln1_scale'], block_params['ln1_shift'])
+    q, k, v = project_qkv(xin, block_params['attn'])
+
+    q_heads = reshape_to_heads(q, num_heads)
+    k_heads = reshape_to_heads(k, num_heads)
+    v_heads = reshape_to_heads(v, num_heads)
+
+    scores = scaled_dot_product_scores(q_heads, k_heads)
+    scores = add_causal_mask_to_scores(scores, causal_mask)
+    attn = attention_weights_softmax(scores)
+
+    attn = weighted_sum_of_values(attn, v_heads)
+    out = merge_heads_and_project(attn, block_params['attn'])
+
+    x = x + out
+
+    xff = layer_norm(x, block_params['ln2_scale'], block_params['ln2_shift'])
+    ff = feedforward_mlp(xff, block_params['ff'])
+
+    return x + ff
+
