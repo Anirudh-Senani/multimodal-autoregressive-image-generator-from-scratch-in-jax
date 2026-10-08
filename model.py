@@ -213,3 +213,8 @@ def build_char_vocab(labels):
 
     return {ch:i for i, ch in enumerate(sorted(vocab))}
 
+# Step 27 - encode_label_to_ids
+def encode_label_to_ids(label, char_vocab):
+    # TODO: map each character of label to its id and return a jnp int array
+    return jnp.asarray([char_vocab[ch] for ch in label])
+

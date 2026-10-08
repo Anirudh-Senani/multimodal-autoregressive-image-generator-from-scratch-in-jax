@@ -36,6 +36,7 @@ python scaffold.py
 - [x] **24.** flatten_token_grid
 - [x] **25.** reshape_tokens_to_grid
 - [x] **26.** build_char_vocab
+- [x] **27.** encode_label_to_ids
 
 ---
 
