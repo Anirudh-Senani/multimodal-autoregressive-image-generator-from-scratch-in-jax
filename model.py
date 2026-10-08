@@ -463,3 +463,8 @@ def top_k_filter_logits(logits, k):
     non_top_k = jnp.argsort(-logits)[k:]
     return logits.at[non_top_k].set(-1e9)
 
+# Step 56 - sample_token_index
+def sample_token_index(probabilities, key):
+    # TODO: Sample one token id from a probability distribution using a PRNG key.
+    return jax.random.choice(key, probabilities.shape[0], p=probabilities)
+

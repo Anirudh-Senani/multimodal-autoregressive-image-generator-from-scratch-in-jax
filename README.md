@@ -65,6 +65,7 @@ python scaffold.py
 - [x] **53.** combine_guided_logits
 - [x] **54.** logits_to_probabilities
 - [x] **55.** top_k_filter_logits
+- [x] **56.** sample_token_index
 
 ---
 
