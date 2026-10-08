@@ -468,3 +468,35 @@ def sample_token_index(probabilities, key):
     # TODO: Sample one token id from a probability distribution using a PRNG key.
     return jax.random.choice(key, probabilities.shape[0], p=probabilities)
 
+# Step 57 - generate_image_tokens
+def generate_image_tokens(params, text_prefix, key, num_image_tokens, num_heads, null_prefix, guidance_scale, temperature, top_k):
+    # TODO: autoregressively sample image tokens with classifier-free guidance
+    image_start_index = text_prefix.shape[0]
+    cond = text_prefix
+    uncond = null_prefix
+
+    for i in range(num_image_tokens):
+        causal_mask = build_causal_mask(image_start_index+i)
+        x_cond = lookup_token_embeddings(params['token_embedding'], cond)
+        x_cond = add_positional_embeddings(x_cond, params['positional_embedding'])
+
+        x_uncond = lookup_token_embeddings(params['token_embedding'], uncond)
+        x_uncond = add_positional_embeddings(x_uncond, params['positional_embedding'])
+
+        hidden_cond = transformer_backbone(x_cond, params['blocks'], causal_mask, num_heads)
+        hidden_uncond = transformer_backbone(x_uncond, params['blocks'], causal_mask, num_heads)
+
+        logits_cond = project_to_logits(hidden_cond, params['output'])[-1]
+        logits_uncond = project_to_logits(hidden_uncond, params['output'])[-1]
+
+        logits = combine_guided_logits(logits_cond, logits_uncond, guidance_scale)
+        top_logits = top_k_filter_logits(logits, top_k)
+        probs = logits_to_probabilities(top_logits, temperature)
+
+        token = jnp.array([sample_token_index(probs, key)])
+
+        cond = jnp.concatenate([cond, token])
+        uncond = jnp.concatenate([uncond, token])
+
+    return cond[image_start_index:]
+
