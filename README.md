@@ -56,6 +56,7 @@ python scaffold.py
 - [x] **44.** feedforward_mlp
 - [x] **45.** transformer_block
 - [x] **46.** transformer_backbone
+- [x] **47.** init_output_projection
 
 ---
 

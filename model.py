@@ -361,3 +361,11 @@ def transformer_backbone(x, blocks_params, causal_mask, num_heads):
 
     return x
 
+# Step 47 - init_output_projection
+def init_output_projection(key, d_model, vocab_size):
+    # TODO: build dict with 'w_out' (d_model, vocab_size) and 'b_out' (vocab_size,)
+    return dict(
+        w_out=jax.random.normal(key, shape=(d_model, vocab_size))*0.02,
+        b_out=jnp.zeros((vocab_size,))
+    )
+
