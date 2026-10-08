@@ -509,3 +509,21 @@ def decode_tokens_to_image(image_tokens, codebook, decoder_params, grid_size, pa
     decoded = decode_latents(latents, decoder_params['decoder'])
     return reassemble_patches_into_image(decoded, grid_size, grid_size, patch_size)
 
+# Step 59 - next_token_accuracy
+def next_token_accuracy(params, batch_sequences, causal_mask, num_heads, image_start_index):
+    # TODO: run the transformer forward pass and score argmax predictions on image positions
+    def forward(params, seq):
+        x = lookup_token_embeddings(params['token_embedding'], seq)
+        x = add_positional_embeddings(x, params['positional_embedding'])
+
+        hidden = transformer_backbone(x, params['blocks'], causal_mask, num_heads)
+        logits = project_to_logits(hidden, params['output'])
+
+        return logits
+
+    batch_logits = jax.vmap(forward, in_axes=(None, 0))(params, batch_sequences)
+    preds = jnp.argmax(batch_logits[:, image_start_index-1:-1], axis=-1)
+    targets = batch_sequences[:, image_start_index:]
+
+    return (preds == targets).mean()
+

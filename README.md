@@ -68,6 +68,7 @@ python scaffold.py
 - [x] **56.** sample_token_index
 - [x] **57.** generate_image_tokens
 - [x] **58.** decode_tokens_to_image
+- [x] **59.** next_token_accuracy
 
 ---
 
