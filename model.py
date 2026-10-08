@@ -282,3 +282,11 @@ def reshape_to_heads(matrix, num_heads):
     seq_len, d_model = matrix.shape
     return matrix.reshape((seq_len, num_heads, d_model//num_heads)).transpose(1,0,2)
 
+# Step 38 - scaled_dot_product_scores
+def scaled_dot_product_scores(q_heads, k_heads):
+    # TODO: compute scaled dot-product attention scores between query and key heads
+    d_model = q_heads.shape[-1]
+    scale = 1.0/(d_model**0.5)
+
+    return (q_heads @ k_heads.transpose(0,2,1)) * scale
+

@@ -47,6 +47,7 @@ python scaffold.py
 - [x] **35.** init_attention_params
 - [x] **36.** project_qkv
 - [x] **37.** reshape_to_heads
+- [x] **38.** scaled_dot_product_scores
 
 ---
 
