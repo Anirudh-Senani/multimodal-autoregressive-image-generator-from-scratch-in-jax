@@ -430,3 +430,13 @@ def apply_transformer_update(params, grads, opt_state, optimizer):
 
     return params, opt_state
 
+# Step 52 - drop_text_prefix
+def drop_text_prefix(sequence, key, image_start_index, drop_prob, null_token_id):
+    # TODO: with prob drop_prob, replace text-prefix positions with null_token_id
+    if jax.random.uniform(key, shape=()) <= drop_prob:
+        out = sequence.at[:image_start_index].set(null_token_id)
+    else:
+        out = sequence
+
+    return out
+
