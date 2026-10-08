@@ -377,9 +377,48 @@ def project_to_logits(hidden_states, output_params):
 # Step 49 - image_token_cross_entropy
 def image_token_cross_entropy(logits, target_ids, image_start_index):
     # TODO: mean next-token cross entropy over image-token positions only
-    shifted = logits[image_start_index-1:-1] - logits[image_start_index-1:-1].max(axis=-1, keepdims=True)
+    shifted = logits[image_start_index:] - logits[image_start_index:].max(axis=-1, keepdims=True)
     logsumexp = jnp.log(jnp.exp(shifted).sum(axis=-1, keepdims=True))
 
     logprobs = shifted - logsumexp
     return (-logprobs[jnp.arange(logprobs.shape[0]), target_ids[image_start_index:]]).mean()
+
+# Step 50 - transformer_loss_and_grads
+def transformer_loss_and_grads(params, batch_sequences, causal_mask, num_heads, image_start_index):
+    # TODO: average per-sequence cross entropy then take value_and_grad over params
+    # tok_embed = lambda x, p: lookup_token_embeddings(p, x)
+    # pos_embed = lambda x, p: add_positional_embeddings(x, p)
+    # transformer_forward = lambda x, p: transformer_backbone(x, p, causal_mask, num_heads)
+    # batch_loss = lambda log, seq: image_token_cross_entropy(log, seq, image_start_index)
+
+    # def forward(params, batch_sequences):
+    #     x = jax.vmap(tok_embed, in_axes=(0,None))(batch_sequences, params['token_embedding'])
+    #     x = jax.vmap(pos_embed, in_axes=(0,None))(x, params['positional_embedding'])
+    #     hidden = jax.vmap(transformer_forward, in_axes=(0,None))(x, params['blocks'])
+    #     logits = project_to_logits(hidden, params['output'])
+
+    #     loss = jax.vmap(batch_loss, in_axes=(0,0))(logits, batch_sequences)
+
+    #     return loss.mean()
+
+    # loss_fn = lambda p: forward(p, batch_sequences)
+    # grad_fn = jax.value_and_grad(loss_fn)
+
+    # return grad_fn(params)
+
+    def forward_single(seq, params):
+        x = lookup_token_embeddings(params['token_embedding'], seq)
+        x = add_positional_embeddings(x, params['positional_embedding'])
+
+        hidden = transformer_backbone(x, params['blocks'], causal_mask, num_heads)
+        logits = project_to_logits(hidden, params['output'])
+
+        loss = image_token_cross_entropy(logits, seq, image_start_index)
+
+        return loss
+
+    loss_fn = lambda p: jax.vmap(forward_single, in_axes=(0, None))(batch_sequences, p).mean()
+    grad_fn = jax.value_and_grad(loss_fn)
+
+    return grad_fn(params)
 
