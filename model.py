@@ -276,3 +276,9 @@ def project_qkv(x, attn_params):
     # TODO: Project x into query, key, and value matrices with wq, wk, wv.
     return x @ attn_params['wq'], x @ attn_params['wk'], x @ attn_params['wv']
 
+# Step 37 - reshape_to_heads
+def reshape_to_heads(matrix, num_heads):
+    # TODO: split the (seq_len, d_model) projection into num_heads attention heads
+    seq_len, d_model = matrix.shape
+    return matrix.reshape((seq_len, num_heads, d_model//num_heads)).transpose(1,0,2)
+
