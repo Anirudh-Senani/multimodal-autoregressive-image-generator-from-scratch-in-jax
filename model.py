@@ -573,3 +573,19 @@ def train_vqvae_on_toy_images(images, params, codebook, opt_state, optimizer, nu
 
     return params, codebook, opt_state, losses
 
+# Step 63 - train_transformer_on_token_sequences
+def train_transformer_on_token_sequences(sequences, params, opt_state, optimizer, text_len, num_steps):
+    # TODO: loop num_steps times: loss_and_grads then optax update, recording each loss
+    seq_len = sequences.shape[1]
+    causal_mask = build_causal_mask(seq_len)
+    num_heads = 2
+    losses = []
+
+    for _ in range(num_steps):
+        loss, grads = transformer_loss_and_grads(params, sequences, causal_mask, num_heads, text_len)
+        params, opt_state = apply_transformer_update(params, grads, opt_state, optimizer)
+
+        losses.append(float(loss))
+
+    return params, opt_state, losses
+
