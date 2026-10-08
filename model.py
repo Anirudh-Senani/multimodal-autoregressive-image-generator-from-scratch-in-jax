@@ -194,3 +194,8 @@ def encode_image_to_tokens(image, params, patch_size):
 
     return inds.reshape((gh, gw))
 
+# Step 24 - flatten_token_grid
+def flatten_token_grid(token_grid):
+    # TODO: Flatten a (grid_h, grid_w) token grid into a 1D sequence in row-major order.
+    return token_grid.reshape(-1)
+
