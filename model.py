@@ -256,3 +256,18 @@ def layer_norm(x, scale, shift, eps=1e-5):
     norm = (x - x.mean(axis=-1, keepdims=True))/jnp.sqrt(x.var(axis=-1, keepdims=True) + eps)
     return scale * norm + shift
 
+# Step 35 - init_attention_params
+def init_attention_params(key, d_model):
+    # TODO: return dict with 'wq','wk','wv','wo', each (d_model, d_model) small random
+    keys = jax.random.split(key, 4)
+    init_w = lambda x: jax.random.normal(x, shape=(d_model, d_model)) * 0.02
+
+    weights = jax.vmap(init_w)(keys)
+
+    return dict(
+        wq=weights[0],
+        wk=weights[1],
+        wv=weights[2],
+        wo=weights[3]
+    )
+

@@ -44,6 +44,7 @@ python scaffold.py
 - [x] **32.** add_positional_embeddings
 - [x] **33.** build_causal_mask
 - [x] **34.** layer_norm
+- [x] **35.** init_attention_params
 
 ---
 
