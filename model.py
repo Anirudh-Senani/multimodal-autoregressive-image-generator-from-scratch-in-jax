@@ -440,3 +440,8 @@ def drop_text_prefix(sequence, key, image_start_index, drop_prob, null_token_id)
 
     return out
 
+# Step 53 - combine_guided_logits
+def combine_guided_logits(cond_logits, uncond_logits, guidance_scale):
+    # TODO: return uncond + guidance_scale * (cond - uncond) for classifier-free guidance
+    return uncond_logits + guidance_scale * (cond_logits - uncond_logits)
+

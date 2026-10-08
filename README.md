@@ -62,6 +62,7 @@ python scaffold.py
 - [x] **50.** transformer_loss_and_grads
 - [x] **51.** apply_transformer_update
 - [x] **52.** drop_text_prefix
+- [x] **53.** combine_guided_logits
 
 ---
 
