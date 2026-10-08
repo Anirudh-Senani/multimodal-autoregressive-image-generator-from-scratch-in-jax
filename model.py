@@ -204,3 +204,12 @@ def reshape_tokens_to_grid(token_sequence, grid_h, grid_w):
     # TODO: reshape a 1D token sequence back into a 2D (grid_h, grid_w) grid
     return token_sequence.reshape((grid_h, grid_w))
 
+# Step 26 - build_char_vocab
+def build_char_vocab(labels):
+    # TODO: map each unique character across all labels to a deterministic integer id
+    vocab = set()
+    for label in set(labels):
+        vocab.update(list(label))
+
+    return {ch:i for i, ch in enumerate(sorted(vocab))}
+
