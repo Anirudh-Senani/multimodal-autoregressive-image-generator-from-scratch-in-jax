@@ -445,3 +445,15 @@ def combine_guided_logits(cond_logits, uncond_logits, guidance_scale):
     # TODO: return uncond + guidance_scale * (cond - uncond) for classifier-free guidance
     return uncond_logits + guidance_scale * (cond_logits - uncond_logits)
 
+# Step 54 - logits_to_probabilities
+def logits_to_probabilities(logits, temperature):
+    # TODO: scale logits by temperature, then apply a stable softmax
+    if temperature <= 0.0:
+        temperature = 1.0
+
+    logits = logits.astype(jnp.float32)
+    shifted = logits/temperature
+    shifted = jnp.exp(shifted - shifted.max(axis=-1, keepdims=True))
+    probs = shifted/(shifted.sum(axis=-1, keepdims=True))
+    return np.array(probs.tolist())
+
