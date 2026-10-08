@@ -353,3 +353,11 @@ def transformer_block(x, block_params, causal_mask, num_heads):
 
     return x + ff
 
+# Step 46 - transformer_backbone
+def transformer_backbone(x, blocks_params, causal_mask, num_heads):
+    # TODO: Apply each transformer block in sequence to the hidden states.
+    for block_params in blocks_params:
+        x = transformer_block(x, block_params, causal_mask, num_heads)
+
+    return x
+
