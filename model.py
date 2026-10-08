@@ -558,7 +558,7 @@ def nearest_neighbor_distance_to_dataset(generated_image, dataset_images):
 def train_vqvae_on_toy_images(images, params, codebook, opt_state, optimizer, num_steps):
     # TODO: loop num_steps times calling vqvae_loss_and_grads then apply_vqvae_update
     params['codebook'] = codebook
-    patch_size = images.shape[1]//2
+    patch_size = 2
     commitment_weight = 0.25
     losses = []
 
