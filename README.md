@@ -64,6 +64,7 @@ python scaffold.py
 - [x] **52.** drop_text_prefix
 - [x] **53.** combine_guided_logits
 - [x] **54.** logits_to_probabilities
+- [x] **55.** top_k_filter_logits
 
 ---
 

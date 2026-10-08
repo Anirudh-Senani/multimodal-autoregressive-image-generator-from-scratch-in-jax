@@ -457,3 +457,9 @@ def logits_to_probabilities(logits, temperature):
     probs = shifted/(shifted.sum(axis=-1, keepdims=True))
     return np.array(probs.tolist())
 
+# Step 55 - top_k_filter_logits
+def top_k_filter_logits(logits, k):
+    # TODO: keep the k largest logits and set the rest to -1e9
+    non_top_k = jnp.argsort(-logits)[k:]
+    return logits.at[non_top_k].set(-1e9)
+
