@@ -50,6 +50,7 @@ python scaffold.py
 - [x] **38.** scaled_dot_product_scores
 - [x] **39.** add_causal_mask_to_scores
 - [x] **40.** attention_weights_softmax
+- [x] **41.** weighted_sum_of_values
 
 ---
 

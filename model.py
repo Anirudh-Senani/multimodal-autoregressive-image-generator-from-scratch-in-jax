@@ -301,3 +301,8 @@ def attention_weights_softmax(masked_scores):
     shifted = jnp.exp(masked_scores - masked_scores.max(axis=-1, keepdims=True))
     return shifted/jnp.sum(shifted, axis=-1, keepdims=True)
 
+# Step 41 - weighted_sum_of_values
+def weighted_sum_of_values(attn_weights, v_heads):
+    # TODO: per head, combine value vectors using the attention weights...
+    return attn_weights @ v_heads
+
