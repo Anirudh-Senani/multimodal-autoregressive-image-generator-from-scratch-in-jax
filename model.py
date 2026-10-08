@@ -306,3 +306,8 @@ def weighted_sum_of_values(attn_weights, v_heads):
     # TODO: per head, combine value vectors using the attention weights...
     return attn_weights @ v_heads
 
+# Step 42 - merge_heads_and_project
+def merge_heads_and_project(head_outputs, attn_params):
+    # TODO: concatenate per-head outputs into d_model and apply the wo projection
+    return head_outputs.transpose(1, 0, 2).reshape(head_outputs.shape[1], -1) @ attn_params['wo']
+
