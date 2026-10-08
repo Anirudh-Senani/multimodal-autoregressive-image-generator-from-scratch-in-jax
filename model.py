@@ -290,3 +290,8 @@ def scaled_dot_product_scores(q_heads, k_heads):
 
     return (q_heads @ k_heads.transpose(0,2,1)) * scale
 
+# Step 39 - add_causal_mask_to_scores
+def add_causal_mask_to_scores(scores, causal_mask):
+    # TODO: broadcast-add the (seq_len, seq_len) mask onto (num_heads, seq_len, seq_len) scores
+    return scores + causal_mask[None,:,:]
+

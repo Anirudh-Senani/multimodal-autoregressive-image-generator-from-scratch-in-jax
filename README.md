@@ -48,6 +48,7 @@ python scaffold.py
 - [x] **36.** project_qkv
 - [x] **37.** reshape_to_heads
 - [x] **38.** scaled_dot_product_scores
+- [x] **39.** add_causal_mask_to_scores
 
 ---
 
