@@ -321,3 +321,11 @@ def init_feedforward_params(key, d_model, d_ff):
         w2=jax.random.normal(keys[1], shape=(d_ff, d_model))*0.02
     )
 
+# Step 44 - feedforward_mlp
+def feedforward_mlp(x, ff_params):
+    # TODO: expand with w1, apply GELU, then project back with w2
+    h1 = x @ ff_params['w1']
+    a1 = h1/2 * (1 + jnp.tanh((2/jnp.pi)**0.5 * (h1 + 0.044715 * h1**3)))
+
+    return a1 @ ff_params['w2']
+
