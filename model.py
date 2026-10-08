@@ -374,3 +374,12 @@ def project_to_logits(hidden_states, output_params):
     # TODO: map each (d_model,) hidden vector to (vocab_size,) logits via a linear layer
     return hidden_states @ output_params['w_out'] + output_params['b_out']
 
+# Step 49 - image_token_cross_entropy
+def image_token_cross_entropy(logits, target_ids, image_start_index):
+    # TODO: mean next-token cross entropy over image-token positions only
+    shifted = logits[image_start_index-1:-1] - logits[image_start_index-1:-1].max(axis=-1, keepdims=True)
+    logsumexp = jnp.log(jnp.exp(shifted).sum(axis=-1, keepdims=True))
+
+    logprobs = shifted - logsumexp
+    return (-logprobs[jnp.arange(logprobs.shape[0]), target_ids[image_start_index:]]).mean()
+
