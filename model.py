@@ -218,3 +218,8 @@ def encode_label_to_ids(label, char_vocab):
     # TODO: map each character of label to its id and return a jnp int array
     return jnp.asarray([char_vocab[ch] for ch in label])
 
+# Step 28 - form_multimodal_sequence
+def form_multimodal_sequence(text_ids, image_tokens, image_token_offset):
+    # TODO: prepend text_ids before image_tokens shifted by image_token_offset
+    return jnp.concatenate([text_ids, image_tokens+image_token_offset])
+

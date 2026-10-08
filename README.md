@@ -37,6 +37,7 @@ python scaffold.py
 - [x] **25.** reshape_tokens_to_grid
 - [x] **26.** build_char_vocab
 - [x] **27.** encode_label_to_ids
+- [x] **28.** form_multimodal_sequence
 
 ---
 
