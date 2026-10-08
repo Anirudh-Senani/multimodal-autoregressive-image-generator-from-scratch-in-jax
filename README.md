@@ -34,6 +34,7 @@ python scaffold.py
 - [x] **22.** apply_vqvae_update
 - [x] **23.** encode_image_to_tokens
 - [x] **24.** flatten_token_grid
+- [x] **25.** reshape_tokens_to_grid
 
 ---
 
