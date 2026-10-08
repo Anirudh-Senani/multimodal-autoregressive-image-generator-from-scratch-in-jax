@@ -228,3 +228,8 @@ def init_token_embedding(key, vocab_size, embed_dim):
     # TODO: build a small randomly initialized (vocab_size, embed_dim) embedding table
     return jax.random.normal(key, shape=(vocab_size, embed_dim)) * 0.02
 
+# Step 30 - init_positional_embedding
+def init_positional_embedding(key, max_seq_len, embed_dim):
+    # TODO: sample a small-magnitude (max_seq_len, embed_dim) table from the PRNG key
+    return jax.random.normal(key, shape=(max_seq_len, embed_dim)) * 0.02
+
