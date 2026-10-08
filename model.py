@@ -245,3 +245,8 @@ def add_positional_embeddings(token_embeds, positional_embedding):
     max_len, _ = positional_embedding.shape
     return token_embeds + positional_embedding[:min(seq_len, max_len)]
 
+# Step 33 - build_causal_mask
+def build_causal_mask(seq_len):
+    # TODO: return (seq_len, seq_len) additive mask: 0.0 where j<=i else -1e9
+    return jnp.triu(jnp.full((seq_len, seq_len), -1e9, dtype=jnp.float32), k=1)
+
