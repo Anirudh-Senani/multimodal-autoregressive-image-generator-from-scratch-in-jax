@@ -589,3 +589,18 @@ def train_transformer_on_token_sequences(sequences, params, opt_state, optimizer
 
     return params, opt_state, losses
 
+# Step 64 - generate_image_from_label
+def generate_image_from_label(label, vocab, transformer_params, codebook, decoder_params, grid_shape, text_len, num_image_tokens, key, guidance_scale, temperature, top_k):
+    # TODO: encode label, build padded text prefix + null prefix, sample image tokens, decode to image.
+    sequence = encode_label_to_ids(label, vocab)
+    image_token_offset = len(vocab)
+
+    text_prefix = jnp.concatenate([sequence, jnp.zeros((max(text_len - sequence.shape[0], 0),))])[:text_len]
+    null_prefix = jnp.zeros((text_len,), dtype=jnp.int64)
+    image_tokens = generate_image_tokens(transformer_params, text_prefix, key, num_image_tokens, transformer_params['num_heads'], null_prefix, guidance_scale, temperature, top_k)
+    image_tokens -= image_token_offset
+
+    image = decode_tokens_to_image(image_tokens, codebook, decoder_params, grid_shape[0], grid_shape[1])
+
+    return image
+
