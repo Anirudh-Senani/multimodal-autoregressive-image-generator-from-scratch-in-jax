@@ -311,3 +311,13 @@ def merge_heads_and_project(head_outputs, attn_params):
     # TODO: concatenate per-head outputs into d_model and apply the wo projection
     return head_outputs.transpose(1, 0, 2).reshape(head_outputs.shape[1], -1) @ attn_params['wo']
 
+# Step 43 - init_feedforward_params
+def init_feedforward_params(key, d_model, d_ff):
+    # TODO: return dict with 'w1' (d_model, d_ff) and 'w2' (d_ff, d_model), small random
+    keys = jax.random.split(key, 2)
+
+    return dict(
+        w1=jax.random.normal(keys[0], shape=(d_model, d_ff))*0.02,
+        w2=jax.random.normal(keys[1], shape=(d_ff, d_model))*0.02
+    )
+

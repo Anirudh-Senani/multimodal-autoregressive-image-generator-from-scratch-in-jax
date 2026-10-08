@@ -52,6 +52,7 @@ python scaffold.py
 - [x] **40.** attention_weights_softmax
 - [x] **41.** weighted_sum_of_values
 - [x] **42.** merge_heads_and_project
+- [x] **43.** init_feedforward_params
 
 ---
 
