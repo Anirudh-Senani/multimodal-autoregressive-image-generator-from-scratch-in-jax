@@ -369,3 +369,8 @@ def init_output_projection(key, d_model, vocab_size):
         b_out=jnp.zeros((vocab_size,))
     )
 
+# Step 48 - project_to_logits
+def project_to_logits(hidden_states, output_params):
+    # TODO: map each (d_model,) hidden vector to (vocab_size,) logits via a linear layer
+    return hidden_states @ output_params['w_out'] + output_params['b_out']
+

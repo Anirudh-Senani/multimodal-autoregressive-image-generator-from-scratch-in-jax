@@ -57,6 +57,7 @@ python scaffold.py
 - [x] **45.** transformer_block
 - [x] **46.** transformer_backbone
 - [x] **47.** init_output_projection
+- [x] **48.** project_to_logits
 
 ---
 
