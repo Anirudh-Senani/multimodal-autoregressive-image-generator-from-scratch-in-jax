@@ -233,3 +233,8 @@ def init_positional_embedding(key, max_seq_len, embed_dim):
     # TODO: sample a small-magnitude (max_seq_len, embed_dim) table from the PRNG key
     return jax.random.normal(key, shape=(max_seq_len, embed_dim)) * 0.02
 
+# Step 31 - lookup_token_embeddings
+def lookup_token_embeddings(token_embedding, token_ids):
+    # TODO: Select the embedding row for each id to get (seq_len, d_model).
+    return token_embedding[token_ids]
+

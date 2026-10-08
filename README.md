@@ -40,6 +40,7 @@ python scaffold.py
 - [x] **28.** form_multimodal_sequence
 - [x] **29.** init_token_embedding
 - [x] **30.** init_positional_embedding
+- [x] **31.** lookup_token_embeddings
 
 ---
 
