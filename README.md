@@ -67,6 +67,7 @@ python scaffold.py
 - [x] **55.** top_k_filter_logits
 - [x] **56.** sample_token_index
 - [x] **57.** generate_image_tokens
+- [x] **58.** decode_tokens_to_image
 
 ---
 

@@ -500,3 +500,12 @@ def generate_image_tokens(params, text_prefix, key, num_image_tokens, num_heads,
 
     return cond[image_start_index:]
 
+# Step 58 - decode_tokens_to_image
+def decode_tokens_to_image(image_tokens, codebook, decoder_params, grid_size, patch_size):
+    # TODO: grid the tokens, look up codebook latents, decode, and reassemble patches
+    grid = reshape_tokens_to_grid(image_tokens, grid_size, grid_size)
+    latents = lookup_codebook_vectors(image_tokens, codebook)
+
+    decoded = decode_latents(latents, decoder_params['decoder'])
+    return reassemble_patches_into_image(decoded, grid_size, grid_size, patch_size)
+
