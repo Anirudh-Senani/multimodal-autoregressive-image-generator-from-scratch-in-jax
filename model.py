@@ -181,3 +181,16 @@ def apply_vqvae_update(params, grads, opt_state, optimizer):
 
     return params, opt_state
 
+# Step 23 - encode_image_to_tokens
+def encode_image_to_tokens(image, params, patch_size):
+    # TODO: split, encode, quantize, and reshape patch codes into a token grid
+    patches = split_image_into_patches(image, patch_size)
+    gh, gw, _, _ = patches.shape
+    flat_patches = flatten_patches(patches)
+
+    latents = encode_patches(flat_patches, params['encoder'])
+    dists = grid_distances_to_codebook(latents, params['codebook'])
+    inds = assign_nearest_codes(dists)
+
+    return inds.reshape((gh, gw))
+

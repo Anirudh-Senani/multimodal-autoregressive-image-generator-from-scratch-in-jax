@@ -32,6 +32,7 @@ python scaffold.py
 - [x] **20.** total_vqvae_loss
 - [x] **21.** vqvae_loss_and_grads
 - [x] **22.** apply_vqvae_update
+- [x] **23.** encode_image_to_tokens
 
 ---
 
