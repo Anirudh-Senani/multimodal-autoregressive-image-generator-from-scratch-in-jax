@@ -422,3 +422,11 @@ def transformer_loss_and_grads(params, batch_sequences, causal_mask, num_heads, 
 
     return grad_fn(params)
 
+# Step 51 - apply_transformer_update
+def apply_transformer_update(params, grads, opt_state, optimizer):
+    # TODO: apply one optax update and return (new_params, new_opt_state)
+    updates, opt_state = optimizer.update(grads, opt_state, params)
+    params = optax.apply_updates(params, updates)
+
+    return params, opt_state
+
