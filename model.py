@@ -250,3 +250,9 @@ def build_causal_mask(seq_len):
     # TODO: return (seq_len, seq_len) additive mask: 0.0 where j<=i else -1e9
     return jnp.triu(jnp.full((seq_len, seq_len), -1e9, dtype=jnp.float32), k=1)
 
+# Step 34 - layer_norm
+def layer_norm(x, scale, shift, eps=1e-5):
+    # TODO: standardize x over its last axis, then apply learned scale and shift
+    norm = (x - x.mean(axis=-1, keepdims=True))/jnp.sqrt(x.var(axis=-1, keepdims=True) + eps)
+    return scale * norm + shift
+

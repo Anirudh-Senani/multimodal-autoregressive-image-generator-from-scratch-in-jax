@@ -43,6 +43,7 @@ python scaffold.py
 - [x] **31.** lookup_token_embeddings
 - [x] **32.** add_positional_embeddings
 - [x] **33.** build_causal_mask
+- [x] **34.** layer_norm
 
 ---
 
