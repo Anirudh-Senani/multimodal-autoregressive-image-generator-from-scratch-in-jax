@@ -45,6 +45,7 @@ python scaffold.py
 - [x] **33.** build_causal_mask
 - [x] **34.** layer_norm
 - [x] **35.** init_attention_params
+- [x] **36.** project_qkv
 
 ---
 

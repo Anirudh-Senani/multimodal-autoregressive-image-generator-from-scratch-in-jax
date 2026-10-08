@@ -271,3 +271,8 @@ def init_attention_params(key, d_model):
         wo=weights[3]
     )
 
+# Step 36 - project_qkv
+def project_qkv(x, attn_params):
+    # TODO: Project x into query, key, and value matrices with wq, wk, wv.
+    return x @ attn_params['wq'], x @ attn_params['wk'], x @ attn_params['wv']
+
