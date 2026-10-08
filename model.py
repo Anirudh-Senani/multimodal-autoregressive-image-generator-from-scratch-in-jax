@@ -527,3 +527,25 @@ def next_token_accuracy(params, batch_sequences, causal_mask, num_heads, image_s
 
     return (preds == targets).mean()
 
+# Step 60 - average_reconstruction_error
+def average_reconstruction_error(encoder_params, decoder_params, codebook, image_batch, patch_size):
+    # TODO: encode, quantize, decode each image and average the squared reconstruction error
+    def forward(image):
+        patches = split_image_into_patches(image, patch_size)
+        gh, gw, _, _ = patches.shape
+        flat_patches = flatten_patches(patches)
+
+        latents = encode_patches(flat_patches, encoder_params['weight'])
+        dists = grid_distances_to_codebook(latents, codebook)
+        inds = assign_nearest_codes(dists)
+
+        quantized = lookup_codebook_vectors(inds, codebook)
+        latents_st = straight_through_quantize(latents, quantized)
+        decoded = decode_latents(latents_st, decoder_params['weight'])
+
+        recon = reassemble_patches_into_image(decoded, gh, gw, patch_size)
+
+        return reconstruction_loss(image, recon)
+
+    return (jax.vmap(forward)(normalize_image_batch(image_batch))).mean()
+
